@@ -100,6 +100,13 @@ export default [
         path: "/crm/customer/:id/edit",
         component: "./crm/customer/edit",
       },
+      // oppo rtunity list routes
+      {
+        name: "Danh sách cơ hội",
+        icon: "smile",
+        path: "/crm/opportunity",
+        component: "./crm/opportunity",
+      },
     ],
   },
   ///////////////////// Project routes /////////////////////
