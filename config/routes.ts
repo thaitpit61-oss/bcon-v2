@@ -72,6 +72,31 @@ export default [
       },
     ],
   },
+  ///////////////////// CRM routes /////////////////////
+  {
+    path: "/crm",
+    name: "CRM",
+    icon: "user",
+    routes: [
+      {
+        name: "Danh sách khách hàng",
+        icon: "smile",
+        path: "/crm/customer",
+        component: "./crm/customer",
+      },
+      // tạo khách hàng mới
+      {
+        path: "/crm/customer/create",
+        component: "./crm/customer/create",
+      },
+      // Edit customer route
+      {
+        path: "/crm/customer/:id/edit",
+        component: "./crm/customer/edit",
+      },
+    ],
+  },
+  ///////////////////// Project routes /////////////////////
   {
     path: "/project",
     name: "Quản lý dự án",
@@ -108,7 +133,6 @@ export default [
         component: "./project/payment-schedule",
       },
 
-      ///////////////////// Project routes /////////////////////
       // Edit project route
       {
         path: "/project/:id/edit",
@@ -167,6 +191,7 @@ export default [
       },
     ],
   },
+
   {
     path: "/product",
     name: "Quản lý sản phẩm",
