@@ -16,11 +16,8 @@ import React, { useRef, useState } from "react";
 
 type CustomerCreatePayload = {
   loaiKhachHang: "Cá nhân" | "Doanh nghiệp";
-
-  /** ===== Cá nhân (bạn đã có) ===== */
   quyDanh?: string;
-  hoVaTenDem?: string;
-  ten?: string;
+  hoVaTen?: string;
   code?: string;
   quocTich?: string;
   loaiGiayTo?: string;
@@ -64,33 +61,25 @@ type CustomerCreatePayload = {
   ngayDongBo?: string;
   daDongBo?: boolean;
 
-  /** ===== Doanh nghiệp (theo ảnh) ===== */
+  /** ===== Doanh nghiệp ===== */
   tenCongTy?: string;
   tenCongTyEN?: string;
   maSoThueCty?: string;
-
   soGPKD?: string;
   ngayCapGPKD?: string;
   noiCapGPKD?: string;
-
   fax?: string;
   ngayCapLaiGPKD?: string;
   noiCapGPKDEN?: string;
-
   dienThoaiCty?: string;
   emailCty?: string;
-
   diaChiCongTy?: string;
   diaChiCongTyEN?: string;
   diaChiLienLacCty?: string;
   diaChiLienLacCtyEN?: string;
-
   loaiHinhKD?: string;
-
-  loaiBDS_1?: string; // Loại BĐS (dòng 1)
-  loaiBDS_2?: string; // Loại BĐS (dòng 2)
-
-  // dùng chung
+  loaiBDS_1?: string;
+  loaiBDS_2?: string;
   nguonDenCty?: string;
   duAnCty?: string;
   sanPhamQuanTamCty?: string;
@@ -99,47 +88,37 @@ type CustomerCreatePayload = {
   mucDichCty?: string;
   capDoCty?: string;
   thoiDiemLienHeCty?: string;
-
   ghiChuCty?: string;
   maFastCty?: string;
   ngayDongBoCty?: string;
   daDongBoCty?: boolean;
-  // ===== Người đại diện (nldd) =====
-  nldd_quyDanh?: string;
-  nldd_hoVaTenDem?: string;
-  nldd_ten?: string;
-  nldd_ngaySinh?: string;
 
+  // ===== Người đại diện =====
+  nldd_quyDanh?: string;
+  nldd_hoVaTen?: string;
+  nldd_ngaySinh?: string;
   nldd_quocTich?: string;
   nldd_loaiGiayTo?: string;
   nldd_soGiayTo?: string;
   nldd_ngayCap?: string;
   nldd_ngayHetHan?: string;
-
   nldd_noiCap?: string;
   nldd_noiCapEN?: string;
-
   nldd_diDong?: string;
   nldd_diDong2?: string;
-
   nldd_email?: string;
   nldd_email2?: string;
-
   nldd_chucVu?: string;
   nldd_chucVuEN?: string;
   nldd_maSoThueCaNhan?: string;
-
   nldd_nguyenQuan?: string;
   nldd_nguyenQuanEN?: string;
-
   nldd_diaChiThuongTru?: string;
   nldd_xaHuyenTinhThuongTru?: string;
   nldd_diaChiThuongTruEN?: string;
-
   nldd_diaChiLienHe?: string;
   nldd_xaHuyenTinhLienHe?: string;
   nldd_diaChiLienHeEN?: string;
-
   nldd_gioiTinh?: string;
 };
 
@@ -149,7 +128,7 @@ const CustomerCreate: React.FC = () => {
     "Cá nhân"
   );
   const [enterpriseTab, setEnterpriseTab] = useState<"ttdn" | "nldd">("ttdn");
-  const formRef = useRef<ProFormInstance<CustomerCreatePayload>>();
+  const formRef = useRef<ProFormInstance<CustomerCreatePayload> | null>(null);
 
   const onFinish = async (values: CustomerCreatePayload) => {
     console.log("CREATE CUSTOMER:", values);
@@ -195,7 +174,6 @@ const CustomerCreate: React.FC = () => {
             },
           }}
         >
-          {/* Bottom: Loại khách hàng */}
           <ProCard
             bordered
             className="rounded-xl"
@@ -207,7 +185,6 @@ const CustomerCreate: React.FC = () => {
                 const next = key as "Cá nhân" | "Doanh nghiệp";
                 setCustomerType(next);
 
-                // giữ đúng value trong form để submit
                 formRef?.current?.setFieldsValue({ loaiKhachHang: next });
               }}
               items={[
@@ -223,7 +200,6 @@ const CustomerCreate: React.FC = () => {
             />
           </ProCard>
 
-          {/* ===== Render theo loại khách hàng ===== */}
           {customerType === "Cá nhân" ? (
             <>
               {/* ===== 1. CÁ NHÂN ===== */}
@@ -234,7 +210,6 @@ const CustomerCreate: React.FC = () => {
                 className="mb-4 rounded-xl"
                 bodyStyle={{ paddingTop: 12, paddingBottom: 12 }}
               >
-                {/* Row 1: 4 field / row */}
                 <ProForm.Group>
                   <ProFormSelect
                     name="quyDanh"
@@ -254,7 +229,7 @@ const CustomerCreate: React.FC = () => {
                     ]}
                   />
                   <ProFormText
-                    name="hoVaTenDem"
+                    name="hoVaTen"
                     label="Họ và tên"
                     colProps={{ span: 6 }}
                     fieldProps={fullWidth}
@@ -279,7 +254,6 @@ const CustomerCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Row 2: 5 field */}
                 <ProForm.Group>
                   <ProFormSelect
                     name="quocTich"
@@ -337,7 +311,6 @@ const CustomerCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Row 3 */}
                 <ProForm.Group>
                   <ProFormDatePicker
                     name="ngayCap"
@@ -365,7 +338,6 @@ const CustomerCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Row 4 */}
                 <ProForm.Group>
                   <ProFormDatePicker
                     name="ngayHetHan"
@@ -387,7 +359,6 @@ const CustomerCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Row 5 */}
                 <ProForm.Group>
                   <ProFormText
                     name="maSoThue"
@@ -409,7 +380,6 @@ const CustomerCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Address thường trú */}
                 <ProForm.Group>
                   <ProFormTextArea
                     name="diaChiThuongTru"
@@ -433,7 +403,6 @@ const CustomerCreate: React.FC = () => {
                   fieldProps={{ ...fullWidth, rows: 2 }}
                 />
 
-                {/* Address liên hệ */}
                 <ProForm.Group>
                   <ProFormTextArea
                     name="diaChiLienHe"
@@ -457,7 +426,6 @@ const CustomerCreate: React.FC = () => {
                   fieldProps={{ ...fullWidth, rows: 2 }}
                 />
 
-                {/* Bank + BDS */}
                 <ProForm.Group>
                   <ProFormSelect
                     name="nganHang"
@@ -492,7 +460,6 @@ const CustomerCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Nghề nghiệp / Mục đích / Nguồn đến */}
                 <ProForm.Group>
                   <ProFormSelect
                     name="ngheNghiep"
@@ -520,7 +487,6 @@ const CustomerCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Dự án + Sản phẩm quan tâm */}
                 <ProForm.Group>
                   <ProFormSelect
                     name="duAn"
@@ -537,7 +503,6 @@ const CustomerCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Chức vụ / Thời điểm liên hệ / Mức thu nhập / Nhóm KH */}
                 <ProForm.Group>
                   <ProFormText
                     name="chucVu"
@@ -577,7 +542,6 @@ const CustomerCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Nhân viên / Cấp độ / Giới tính */}
                 <ProForm.Group>
                   <ProFormText
                     name="nhanVien"
@@ -609,7 +573,6 @@ const CustomerCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Ghi chú */}
                 <ProFormTextArea
                   name="ghiChu"
                   label="Ghi chú"
@@ -617,7 +580,6 @@ const CustomerCreate: React.FC = () => {
                   fieldProps={{ ...fullWidth, rows: 2 }}
                 />
 
-                {/* Mã Fast / Ngày đồng bộ / Đã đồng bộ */}
                 <ProForm.Group>
                   <ProFormText
                     name="maFast"
@@ -651,7 +613,7 @@ const CustomerCreate: React.FC = () => {
               className="rounded-xl"
               bodyStyle={{ paddingTop: 12, paddingBottom: 12 }}
             >
-              {/* Tabs con như ảnh: Thông tin doanh nghiệp / Thông tin người đại diện */}
+              {/* Tabs for Enterprise Info and Representative Info */}
               <Tabs
                 className="mb-2"
                 activeKey={enterpriseTab}
@@ -664,7 +626,6 @@ const CustomerCreate: React.FC = () => {
 
               {enterpriseTab === "ttdn" ? (
                 <>
-                  {/* Row 1 */}
                   <ProForm.Group>
                     <ProFormText
                       name="tenCongTy"
@@ -686,7 +647,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Row 2 */}
                   <ProForm.Group>
                     <ProFormText
                       name="tenCongTyEN"
@@ -708,7 +668,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Row 3 */}
                   <ProForm.Group>
                     <ProFormText
                       name="soGPKD"
@@ -736,7 +695,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Row 4 */}
                   <ProForm.Group>
                     <ProFormText
                       name="fax"
@@ -764,7 +722,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Address */}
                   <ProFormTextArea
                     name="diaChiCongTy"
                     label="Địa chỉ Công ty"
@@ -790,7 +747,6 @@ const CustomerCreate: React.FC = () => {
                     fieldProps={{ ...fullWidth, rows: 2 }}
                   />
 
-                  {/* Bank + loại BĐS */}
                   <ProForm.Group>
                     <ProFormSelect
                       name="nganHang"
@@ -825,7 +781,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Loại hình KD / Loại BĐS / Nguồn đến */}
                   <ProForm.Group>
                     <ProFormText
                       name="loaiHinhKD"
@@ -854,7 +809,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Dự án / Sản phẩm quan tâm / Nhóm KH */}
                   <ProForm.Group>
                     <ProFormSelect
                       name="duAnCty"
@@ -880,7 +834,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Nhân viên / Mục đích / Cấp độ / Thời điểm liên hệ */}
                   <ProForm.Group>
                     <ProFormText
                       name="nhanVienCty"
@@ -919,7 +872,6 @@ const CustomerCreate: React.FC = () => {
                     fieldProps={{ ...fullWidth, rows: 2 }}
                   />
 
-                  {/* Mã Fast / Ngày đồng bộ / Đã đồng bộ */}
                   <ProForm.Group>
                     <ProFormText
                       name="maFastCty"
@@ -952,7 +904,6 @@ const CustomerCreate: React.FC = () => {
                 </>
               ) : (
                 <>
-                  {/* Row 1 */}
                   <ProForm.Group>
                     <ProFormSelect
                       name="nldd_quyDanh"
@@ -991,7 +942,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Row 2 */}
                   <ProForm.Group>
                     <ProFormSelect
                       name="nldd_quocTich"
@@ -1049,7 +999,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Row 3 */}
                   <ProForm.Group>
                     <ProFormText
                       name="nldd_noiCap"
@@ -1065,7 +1014,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Row 4 */}
                   <ProForm.Group>
                     <ProFormText
                       name="nldd_diDong"
@@ -1093,7 +1041,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Row 5 */}
                   <ProForm.Group>
                     <ProFormText
                       name="nldd_chucVu"
@@ -1115,7 +1062,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Row 6 */}
                   <ProForm.Group>
                     <ProFormText
                       name="nldd_nguyenQuan"
@@ -1131,7 +1077,6 @@ const CustomerCreate: React.FC = () => {
                     />
                   </ProForm.Group>
 
-                  {/* Address thường trú */}
                   <ProForm.Group>
                     <ProFormTextArea
                       name="nldd_diaChiThuongTru"
@@ -1155,7 +1100,6 @@ const CustomerCreate: React.FC = () => {
                     fieldProps={{ ...fullWidth, rows: 2 }}
                   />
 
-                  {/* Address liên hệ */}
                   <ProForm.Group>
                     <ProFormTextArea
                       name="nldd_diaChiLienHe"
@@ -1179,7 +1123,6 @@ const CustomerCreate: React.FC = () => {
                     fieldProps={{ ...fullWidth, rows: 2 }}
                   />
 
-                  {/* Gender */}
                   <ProFormSelect
                     name="nldd_gioiTinh"
                     label="Giới tính"

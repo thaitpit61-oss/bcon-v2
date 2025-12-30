@@ -316,7 +316,7 @@ const CustomerList: React.FC = () => {
         fixed: "right",
         render: (_, record) => (
           <Tooltip title="Chỉnh sửa">
-            <a onClick={() => history.push('#')}>
+            <a onClick={() => history.push(`/crm/customer/${record.id}/edit`)}>
               <EditOutlined style={{ color: "#1677ff", fontSize: 16 }} />
             </a>
           </Tooltip>
@@ -334,7 +334,6 @@ const CustomerList: React.FC = () => {
         dataSource={data}
         search={{
           labelWidth: "auto",
-          // collapsed: false, // nếu muốn mở sẵn
         }}
         pagination={{ pageSize: 10 }}
         scroll={{ x: 3600 }}

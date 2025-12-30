@@ -78,13 +78,19 @@ export default [
     name: "CRM",
     icon: "user",
     routes: [
+      // default crm route
+      {
+        path: "/crm",
+        redirect: "/crm/customer",
+      },
+      // customer list routes
       {
         name: "Danh sách khách hàng",
         icon: "smile",
         path: "/crm/customer",
         component: "./crm/customer",
       },
-      // tạo khách hàng mới
+      // create new customer route
       {
         path: "/crm/customer/create",
         component: "./crm/customer/create",
