@@ -107,6 +107,11 @@ export default [
         path: "/crm/opportunity",
         component: "./crm/opportunity",
       },
+        // Edit opportunity route
+      {
+        path: "/crm/opportunity/:id/edit",
+        component: "./crm/opportunity/edit",
+      },
     ],
   },
   ///////////////////// Project routes /////////////////////
