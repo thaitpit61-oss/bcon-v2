@@ -194,7 +194,7 @@ const QuotationList: React.FC = () => {
             <a
               onClick={() =>
                 history.push(`/crm/price-quote/${record.id}/edit`)
-              }
+              } 
             >
               <EditOutlined style={{ color: "#1677ff", fontSize: 16 }} />
             </a>
