@@ -1,9 +1,9 @@
 import { EditOutlined } from "@ant-design/icons";
 import type { ProColumns } from "@ant-design/pro-components";
 import { PageContainer, ProTable } from "@ant-design/pro-components";
-import { history } from "@umijs/max";
+import { history, request } from "@umijs/max";
 import { Button, Tag, Tooltip } from "antd";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 
 type Customer = {
   id: number;
@@ -51,56 +51,18 @@ type Customer = {
   daDongBo: boolean;
 };
 
+type ApiListResponse<T> = {
+  success: boolean;
+  message?: string;
+  data: {
+    items: T[];
+    page: number;
+    pageSize: number;
+    total: number;
+  };
+};
+
 const CustomerList: React.FC = () => {
-  const [data] = useState<Customer[]>([
-    {
-      id: 1,
-      xung: "Bà",
-      hoVaTen: "BÙI QUỲNH ANH",
-      maKhachHang: "030296021611",
-      ngaySinh: "06/12/2007",
-      diDong: "0903316742",
-      soGiayTo: "079307004898",
-
-      diaChiLienLac:
-        "Số nhà 724/5 Điện Biên Phủ, Phường Vườn Lài, Thành Phố Hồ Chí Minh",
-      diaChiThuongTru:
-        "232/8/3 Bà Hạt, Khu phố 18, Phường Vườn Lài, Thành Phố Hồ Chí Minh",
-      email: "thy_huong78@yahoo.com",
-
-      maThueTNCN: "079307004898",
-      chucVu: "",
-      nhomKhachHang: "Chưa phân loại",
-      nhanVien: "",
-      ngheNghiep: "Chưa phân loại",
-
-      duAn: "",
-      loaiBDS: "Đất nền",
-      sanPhamQuanTam: "",
-      donViCongTac: "",
-
-      nguonDen: "",
-      capDo: "Chờ xử lý",
-      mucDich: "[Chưa chọn]",
-      dienGiai: "",
-      ngayXuLy: "",
-
-      danhSachDuAn: "",
-
-      loaiGiayTo: "Thẻ căn cước nhân dân",
-      soCCCD: "079307004898",
-      passport: "",
-      noiCap: "Cục Cảnh sát quản lý hành chính về trật tự xã hội",
-      ngayCap: "27/04/2022",
-
-      gioiTinh: "Nữ",
-
-      maKHFast: "030200202544",
-      ngayDongBo: "30/12/2025 | 11:35",
-      daDongBo: true,
-    },
-  ]);
-
   const columns: ProColumns<Customer>[] = useMemo(
     () => [
       { title: "ID", dataIndex: "id", search: false, width: 70, fixed: "left" },
@@ -308,7 +270,6 @@ const CustomerList: React.FC = () => {
           </Tag>
         ),
       },
-
       {
         title: "Hành động",
         valueType: "option",
@@ -331,10 +292,7 @@ const CustomerList: React.FC = () => {
       <ProTable<Customer>
         rowKey="id"
         columns={columns}
-        dataSource={data}
-        search={{
-          labelWidth: "auto",
-        }}
+        search={{ labelWidth: "auto" }}
         pagination={{ pageSize: 10 }}
         scroll={{ x: 3600 }}
         rowSelection={{}}
@@ -347,6 +305,34 @@ const CustomerList: React.FC = () => {
             Tạo khách hàng mới
           </Button>,
         ]}
+        request={async (params) => {
+          const { current = 1, pageSize = 10, ...rest } = params;
+
+          const keyword =
+            (rest.hoVaTen as string) ||
+            (rest.maKhachHang as string) ||
+            (rest.diDong as string) ||
+            (rest.email as string) ||
+            "";
+
+          const resp = await request<ApiListResponse<Customer>>(
+            "/api/customers",
+            {
+              method: "GET",
+              params: {
+                page: current,
+                pageSize,
+                keyword: keyword?.trim(),
+              },
+            }
+          );
+
+          return {
+            data: resp.data.items,
+            success: resp.success,
+            total: resp.data.total,
+          };
+        }}
       />
     </PageContainer>
   );
