@@ -40,7 +40,7 @@ type OpportunityCreatePayload = {
   ghiChu: string;
 };
 
-const OpportunityCreate: React.FC = () => {
+const OpportunityEdit: React.FC = () => {
   const fullWidth = { style: { width: "100%" } };
 
   const optQuyDanh = useMemo(
@@ -123,10 +123,10 @@ const OpportunityCreate: React.FC = () => {
 
   return (
     <PageContainer
-      title="Thêm Cơ hội"
+      title="Chỉnh sửa Cơ hội"
       onBack={() => history.push("/opportunity")}
       extra={[
-        <Button key="cancel" onClick={() => history.push("/opportunity")}>
+        <Button key="cancel" onClick={() => history.push("/crm/opportunity")}>
           Bỏ qua
         </Button>,
         <Button
@@ -142,12 +142,12 @@ const OpportunityCreate: React.FC = () => {
         </Button>,
       ]}
     >
-      <ProCard className="rounded-xl" bodyStyle={{ padding: 12 }}>
+      <ProCard bodyStyle={{ padding: 12 }}>
         <ProForm<OpportunityCreatePayload>
           layout="vertical"
           grid
-          colProps={{ span: 12 }}
-          rowProps={{ gutter: [12, 8] }}
+          colProps={{ span: 24 }}
+          rowProps={{ gutter: [14, 8] }}
           initialValues={{
             soNhuCau: "CH-0000001",
             giaTri: 0,
@@ -165,22 +165,21 @@ const OpportunityCreate: React.FC = () => {
           }}
           onFinish={async (values) => {
             console.log("CREATE OPPORTUNITY:", values);
-            message.success("Tạo cơ hội (demo) thành công!");
-            history.push("/opportunity");
+            message.success("Chỉnh sửa cơ hội (demo) thành công!");
+            history.push("/crm/opportunity");
             return true;
           }}
         >
-          {/* LAYOUT 2 CỘT */}
           <ProCard
-            split="vertical"
+            gutter={[16, 16]}
             className="rounded-xl"
             bodyStyle={{ padding: 0 }}
           >
-            {/* ===== LEFT ===== */}
             <ProCard
-              colSpan="60%"
+              colSpan={{ xs: 24, md: 14 }} // ~60%
               className="rounded-xl"
               bodyStyle={{ padding: 12 }}
+              split="horizontal"
             >
               {/* Thông tin khách hàng */}
               <ProCard
@@ -190,7 +189,6 @@ const OpportunityCreate: React.FC = () => {
                 className="rounded-xl mb-3"
                 bodyStyle={{ padding: 12 }}
               >
-                {/* Row: Quý danh + Họ và tên (kèm Search/Add) */}
                 <ProForm.Group>
                   <ProFormSelect
                     name="quyDanh"
@@ -200,7 +198,6 @@ const OpportunityCreate: React.FC = () => {
                     options={optQuyDanh}
                   />
 
-                  {/* Họ và tên + nút Search/Add */}
                   <ProFormText
                     name="hoVaTen"
                     label="Họ và tên / Full name"
@@ -220,7 +217,6 @@ const OpportunityCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Row: CMND + Ngày cấp + Nơi cấp */}
                 <ProForm.Group>
                   <ProFormText
                     name="soCMND"
@@ -242,7 +238,6 @@ const OpportunityCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Row: Phone + Email */}
                 <ProForm.Group>
                   <ProFormText
                     name="diDong"
@@ -258,7 +253,6 @@ const OpportunityCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Row: Quốc tịch + Tỉnh */}
                 <ProForm.Group>
                   <ProFormSelect
                     name="quocTich"
@@ -276,7 +270,6 @@ const OpportunityCreate: React.FC = () => {
                   />
                 </ProForm.Group>
 
-                {/* Address */}
                 <ProFormTextArea
                   name="diaChi"
                   label="Địa chỉ / Address"
@@ -284,8 +277,7 @@ const OpportunityCreate: React.FC = () => {
                   fieldProps={{ ...fullWidth, rows: 2 }}
                 />
               </ProCard>
-
-              {/* Thông tin nhân viên */}
+              {/* --- Thông tin Nhân viên ) --- */}
               <ProCard
                 title="Thông tin Nhân viên"
                 bordered
@@ -311,9 +303,8 @@ const OpportunityCreate: React.FC = () => {
               </ProCard>
             </ProCard>
 
-            {/* ===== RIGHT ===== */}
             <ProCard
-              colSpan="40%"
+              colSpan={{ xs: 24, md: 10 }} // ~40%
               className="rounded-xl"
               bodyStyle={{ padding: 12 }}
             >
@@ -399,4 +390,4 @@ const OpportunityCreate: React.FC = () => {
   );
 };
 
-export default OpportunityCreate;
+export default OpportunityEdit;

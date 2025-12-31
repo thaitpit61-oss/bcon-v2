@@ -297,7 +297,9 @@ const OpportunityList: React.FC = () => {
         search: false,
         render: (_, record) => (
           <Tooltip title="Chỉnh sửa">
-            <a onClick={() => history.push(`/opportunity/${record.id}/edit`)}>
+            <a
+              onClick={() => history.push(`/crm/opportunity/${record.id}/edit`)}
+            >
               <EditOutlined style={{ color: "#1677ff", fontSize: 16 }} />
             </a>
           </Tooltip>
@@ -321,7 +323,7 @@ const OpportunityList: React.FC = () => {
           <Button
             key="create"
             type="primary"
-            onClick={() => history.push("/opportunity/create")}
+            onClick={() => history.push("/crm/opportunity/create")}
           >
             Tạo cơ hội mới
           </Button>,
