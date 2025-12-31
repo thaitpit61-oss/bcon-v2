@@ -107,7 +107,7 @@ export default [
         path: "/crm/opportunity",
         component: "./crm/opportunity",
       },
-        // Edit opportunity route
+      // Edit opportunity route
       {
         path: "/crm/opportunity/:id/edit",
         component: "./crm/opportunity/edit",
@@ -116,6 +116,35 @@ export default [
       {
         path: "/crm/opportunity/create",
         component: "./crm/opportunity/create",
+      },
+      // membership card list route
+      {
+        name: "Thẻ thành viên",
+        icon: "smile",
+        path: "/crm/membership-card",
+        component: "./crm/membership-card",
+      },
+      // membership card edit route
+      {
+        path: "/crm/membership-card/:id/edit",
+        component: "./crm/membership-card/edit",
+      },
+      // membership card create route
+      {
+        path: "/crm/membership-card/create",
+        component: "./crm/membership-card/create",
+      },
+      // price quote list route
+      {
+        name: "Báo giá",
+        icon: "smile",
+        path: "/crm/price-quote",
+        component: "./crm/price-quote",
+      },
+      // price quote edit
+      {
+        path: "/crm/price-quote/:id/edit",
+        component: "./crm/price-quote/edit",
       },
     ],
   },
