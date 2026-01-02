@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   PageContainer,
   ProCard,
@@ -12,6 +11,7 @@ import {
 import { history } from '@umijs/max';
 import { message } from 'antd';
 import dayjs from 'dayjs';
+import React from 'react';
 
 type PromotionCreateForm = {
   duAn?: string;
@@ -49,7 +49,10 @@ const PromotionCreate: React.FC = () => {
   };
 
   return (
-    <PageContainer title="Tạo chương trình khuyến mãi" onBack={() => history.push('/project/promotions')}>
+    <PageContainer
+      title="Tạo chương trình khuyến mãi"
+      onBack={() => history.push('/project/promotions')}
+    >
       <ProCard>
         <ProForm<PromotionCreateForm>
           layout="vertical"
@@ -83,11 +86,23 @@ const PromotionCreate: React.FC = () => {
           <ProFormText
             name="tenChuongTrinh"
             label="Tên chương trình"
-            rules={[{ required: true, message: 'Vui lòng nhập tên chương trình' }]}
-            colProps={{ span: 24 }}
+            rules={[
+              { required: true, message: 'Vui lòng nhập tên chương trình' },
+            ]}
+            colProps={{ span: 12 }}
           />
 
-          <ProFormText name="tenQuaTang" label="Quà tặng" colProps={{ span: 24 }} />
+          <ProFormText
+            name="tenQuaTang"
+            label="Quà tặng"
+            colProps={{ span: 12 }}
+          />
+
+          <ProFormDatePicker
+            name="ngayTao"
+            label="Ngày tạo"
+            fieldProps={{ format: 'YYYY-MM-DD' }}
+          />
 
           <ProFormTextArea
             name="keHoachBanHang"
@@ -124,18 +139,13 @@ const PromotionCreate: React.FC = () => {
             min={0}
             fieldProps={{
               precision: 0,
-              formatter: (v) => (v ? `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',') : ''),
+              formatter: (v) =>
+                v ? `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',') : '',
               parser: (v) => Number((v || '').replace(/,/g, '')),
             }}
           />
 
           <ProFormText name="nhanVienTao" label="Nhân viên tạo" />
-
-          <ProFormDatePicker
-            name="ngayTao"
-            label="Ngày tạo"
-            fieldProps={{ format: 'YYYY-MM-DD' }}
-          />
         </ProForm>
       </ProCard>
     </PageContainer>
