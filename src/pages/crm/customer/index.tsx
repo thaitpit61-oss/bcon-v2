@@ -1,7 +1,7 @@
 import { EditOutlined } from "@ant-design/icons";
 import type { ProColumns } from "@ant-design/pro-components";
 import { PageContainer, ProTable } from "@ant-design/pro-components";
-import { history, request } from "@umijs/max";
+import { history } from "@umijs/max";
 import { Button, Tag, Tooltip } from "antd";
 import React, { useMemo } from "react";
 
@@ -315,17 +315,16 @@ const CustomerList: React.FC = () => {
             (rest.email as string) ||
             "";
 
-          const resp = await request<ApiListResponse<Customer>>(
-            "/api/customers",
-            {
-              method: "GET",
-              params: {
-                page: current,
-                pageSize,
-                keyword: keyword?.trim(),
-              },
-            }
-          );
+          const qs = new URLSearchParams({
+            page: String(current),
+            pageSize: String(pageSize),
+            keyword: keyword.trim(),
+          });
+
+          const res = await fetch(`/api/customers?${qs.toString()}`, {
+            method: "GET",
+          });
+          const resp: ApiListResponse<Customer> = await res.json();
 
           return {
             data: resp.data.items,

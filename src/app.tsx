@@ -13,6 +13,7 @@ import "@ant-design/v5-patch-for-react-19";
 import type { RequestConfig, RunTimeLayoutConfig } from "@umijs/max";
 import { history, Link } from "@umijs/max";
 import defaultSettings from "../config/defaultSettings";
+import { errorConfig } from "./requestErrorConfig";
 
 const isDev = process.env.NODE_ENV === "development" || process.env.CI;
 const loginPath = "/user/login";
@@ -154,11 +155,11 @@ export const layout: RunTimeLayoutConfig = ({
  * 它基于 axios 和 ahooks 的 useRequest 提供了一套统一的网络请求和错误处理方案。
  * @doc https://umijs.org/docs/max/request#配置
  */
-// export const request: RequestConfig = {
-//   baseURL: "https://proapi.azurewebsites.net",
-//   ...errorConfig,
-// };
 export const request: RequestConfig = {
-  baseURL: process.env.REACT_APP_API_BASE_URL, // tự đổi theo env
-  timeout: 10000,
+  baseURL: "https://proapi.azurewebsites.net",
+  ...errorConfig,
 };
+// export const request: RequestConfig = {
+//   baseURL: process.env.REACT_APP_API_BASE_URL, // tự đổi theo env
+//   timeout: 10000,
+// };
