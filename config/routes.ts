@@ -148,30 +148,63 @@ export default [
       },
     ],
   },
-  ///////////////////// Project routes /////////////////////
+  ///////////////////// System routes /////////////////////
   {
     path: "/system",
     name: "Danh mục hệ thống",
     icon: "setting",
     routes: [
+      // vào /system thì đá sang CRM (hoặc trang con đầu tiên)
       {
         path: "/system",
-        redirect: "/system/title",
+        redirect: "/system/crm/title",
       },
+      // ===== Nhóm CRM =====
       {
-        name: "Danh xưng",
+        name: "CRM",
         icon: "smile",
-        path: "/system/title",
-        component: "./system/title",
+        path: "/system/crm",
+        routes: [
+          {
+            path: "/system/crm",
+            redirect: "/system/crm/title",
+          },
+          {
+            name: "Danh xưng",
+            icon: "smile",
+            path: "/system/crm/title",
+            component: "./system/crm/title",
+            // hoặc bạn muốn tách folder thì: component: "./system/crm/title",
+          },
+          {
+            name: "Ngành nghề",
+            icon: "smile",
+            path: "/system/crm/profession",
+            component: "./system/crm/profession",
+          },
+          {
+            name: "Nguồn đến",
+            icon: "smile",
+            path: "/system/crm/insource",
+            component: "./system/crm/insource",
+          },
+          {
+            name: "Thời điểm liên hệ",
+            icon: "smile",
+            path: "/system/crm/contact-time",
+            component: "./system/crm/contact-time",
+          },
+          {
+            name: "Loại hình kinh doanh",
+            icon: "smile",
+            path: "/system/crm/business-type",
+            component: "./system/crm/business-type",
+          },
+        ],
       },
-      //   {
-      //   name: "Danh xưng",
-      //   icon: "smile",
-      //   path: "/system/title",
-      //   component: "./system/list",
-      // },
     ],
   },
+
   ///////////////////// Project routes /////////////////////
   {
     path: "/project",
