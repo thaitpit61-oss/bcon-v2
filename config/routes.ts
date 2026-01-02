@@ -159,6 +159,36 @@ export default [
         path: "/system",
         redirect: "/system/crm/title",
       },
+       // ===== Nhóm Phân quyền =====
+      {
+        name: "Phân quyền",
+        icon: "smile",
+        path: "/system/authorization",
+        routes: [
+          {
+            path: "/system/authorization",
+            redirect: "/system/authorization/position",
+          },
+          {
+            name: "Chức vụ",
+            icon: "smile",
+            path: "/system/authorization/position",
+            component: "./system/authorization/position",
+          },
+          {
+            name: "Phòng ban",
+            icon: "smile",
+            path: "/system/authorization/department",
+            component: "./system/authorization/department",
+          },
+          {
+            name: "Nhóm kinh doanh",
+            icon: "smile",
+            path: "/system/authorization/business-unit",
+            component: "./system/authorization/business-unit",
+          },
+        ],
+      },
       // ===== Nhóm CRM =====
       {
         name: "CRM",
@@ -174,7 +204,6 @@ export default [
             icon: "smile",
             path: "/system/crm/title",
             component: "./system/crm/title",
-            // hoặc bạn muốn tách folder thì: component: "./system/crm/title",
           },
           {
             name: "Ngành nghề",
