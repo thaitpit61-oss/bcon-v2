@@ -150,6 +150,30 @@ export default [
   },
   ///////////////////// Project routes /////////////////////
   {
+    path: "/system",
+    name: "Danh mục hệ thống",
+    icon: "setting",
+    routes: [
+      {
+        path: "/system",
+        redirect: "/system/title",
+      },
+      {
+        name: "Danh xưng",
+        icon: "smile",
+        path: "/system/title",
+        component: "./system/title",
+      },
+      //   {
+      //   name: "Danh xưng",
+      //   icon: "smile",
+      //   path: "/system/title",
+      //   component: "./system/list",
+      // },
+    ],
+  },
+  ///////////////////// Project routes /////////////////////
+  {
     path: "/project",
     name: "Quản lý dự án",
     icon: "project",
