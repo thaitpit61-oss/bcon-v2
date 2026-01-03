@@ -382,6 +382,25 @@ export default [
       },
     ],
   },
+  
+    ///////////////////// User routes /////////////////////
+  {
+    path: "/user",
+    name: "Quản lý người dùng",
+    icon: "user",
+    routes: [
+      {
+        path: "/user",
+        redirect: "/user",
+      },
+      {
+        name: "Danh sách người dùng",
+        icon: "smile",
+        path: "/user/list",
+        component: "./user/list",
+      },
+    ],
+  },
   // {
   //   path: "/form",
   //   icon: "form",

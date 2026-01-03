@@ -15,10 +15,10 @@ type SettingsState = {
 const Settings: React.FC = () => {
   const { styles } = useStyles();
   const menuMap: Record<string, React.ReactNode> = {
-    base: '基本设置',
-    security: '安全设置',
-    binding: '账号绑定',
-    notification: '新消息通知',
+    base: 'Cài đặt tổng quan',
+    security: 'Bảo mật',
+    binding: 'Liên kết tài khoản',
+    notification: 'Thông báo',
   };
   const [initConfig, setInitConfig] = useState<SettingsState>({
     mode: 'inline',

@@ -1,4 +1,4 @@
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from "@ant-design/icons";
 import {
   ProForm,
   ProFormDependency,
@@ -6,23 +6,23 @@ import {
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
-import { Button, Input, message, Upload } from 'antd';
-import React from 'react';
-import { queryCity, queryCurrent, queryProvince } from '../service';
-import useStyles from './index.style';
+} from "@ant-design/pro-components";
+import { useRequest } from "@umijs/max";
+import { Button, Input, message, Upload } from "antd";
+import React from "react";
+import { queryCity, queryCurrent, queryProvince } from "../service";
+import useStyles from "./index.style";
 
 const validatorPhone = (
   _rule: any,
   value: string[],
-  callback: (message?: string) => void,
+  callback: (message?: string) => void
 ) => {
   if (!value[0]) {
-    callback('Please input your area code!');
+    callback("Please input your area code!");
   }
   if (!value[1]) {
-    callback('Please input your phone number!');
+    callback("Please input your phone number!");
   }
   callback();
 };
@@ -39,13 +39,13 @@ const BaseView: React.FC = () => {
         return currentUser.avatar;
       }
       const url =
-        'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
+        "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png";
       return url;
     }
-    return '';
+    return "";
   };
   const handleFinish = async () => {
-    message.success('更新基本信息成功');
+    message.success("Thông tin cơ bản đã được cập nhật thành công.");
   };
   return (
     <div className={styles.baseView}>
@@ -57,73 +57,73 @@ const BaseView: React.FC = () => {
               onFinish={handleFinish}
               submitter={{
                 searchConfig: {
-                  submitText: '更新基本信息',
+                  submitText: "Cập nhật thông tin",
                 },
                 render: (_, dom) => dom[1],
               }}
               initialValues={{
                 ...currentUser,
-                phone: currentUser?.phone.split('-'),
+                phone: currentUser?.phone.split("-"),
               }}
               hideRequiredMark
             >
               <ProFormText
                 width="md"
                 name="email"
-                label="邮箱"
+                label="Email"
                 rules={[
                   {
                     required: true,
-                    message: '请输入您的邮箱!',
+                    message: "Vui lòng nhập địa chỉ email của bạn!",
                   },
                 ]}
               />
               <ProFormText
                 width="md"
                 name="name"
-                label="昵称"
+                label="Tên"
                 rules={[
                   {
                     required: true,
-                    message: '请输入您的昵称!',
+                    message: "Vui lòng nhập tên của bạn!",
                   },
                 ]}
               />
               <ProFormTextArea
                 name="profile"
-                label="个人简介"
+                label="Thông tin cá nhân"
                 rules={[
                   {
                     required: true,
-                    message: '请输入个人简介!',
+                    message: "Vui lòng nhập thông tin cá nhân của bạn!",
                   },
                 ]}
-                placeholder="个人简介"
+                placeholder="Thông tin cá nhân"
               />
               <ProFormSelect
                 width="sm"
                 name="country"
-                label="国家/地区"
+                label="Quốc gia"
                 rules={[
                   {
                     required: true,
-                    message: '请输入您的国家或地区!',
+                    message: "Vui lòng nhập quốc gia hoặc khu vực của bạn!",
                   },
                 ]}
                 options={[
                   {
-                    label: '中国',
-                    value: 'China',
+                    label: "Việt Nam",
+                    value: "Vietnam",
                   },
                 ]}
               />
 
-              <ProForm.Group title="所在省市" size={8}>
+              <ProForm.Group title="Tỉnh/Thành phố" size={8}>
                 <ProFormSelect
                   rules={[
                     {
                       required: true,
-                      message: '请输入您的所在省!',
+                      message: "Vui lòng nhập tỉnh/thành phố/huyện của bạn!",
                     },
                   ]}
                   width="sm"
@@ -142,7 +142,7 @@ const BaseView: React.FC = () => {
                     });
                   }}
                 />
-                <ProFormDependency name={['province']}>
+                <ProFormDependency name={["province"]}>
                   {({ province }) => {
                     return (
                       <ProFormSelect
@@ -154,7 +154,7 @@ const BaseView: React.FC = () => {
                         rules={[
                           {
                             required: true,
-                            message: '请输入您的所在城市!',
+                            message: "Vui lòng nhập thành phố của bạn!",
                           },
                         ]}
                         disabled={!province}
@@ -162,7 +162,7 @@ const BaseView: React.FC = () => {
                           if (!province?.key) {
                             return [];
                           }
-                          return queryCity(province.key || '').then(
+                          return queryCity(province.key || "").then(
                             ({ data }) => {
                               return data.map((item) => {
                                 return {
@@ -170,7 +170,7 @@ const BaseView: React.FC = () => {
                                   value: item.id,
                                 };
                               });
-                            },
+                            }
                           );
                         }}
                       />
@@ -181,21 +181,21 @@ const BaseView: React.FC = () => {
               <ProFormText
                 width="md"
                 name="address"
-                label="街道地址"
+                label="Địa chỉ"
                 rules={[
                   {
                     required: true,
-                    message: '请输入您的街道地址!',
+                    message: "Vui lòng nhập địa chỉ thường trú của bạn!",
                   },
                 ]}
               />
               <ProFormFieldSet
                 name="phone"
-                label="联系电话"
+                label="Số điện thoại"
                 rules={[
                   {
                     required: true,
-                    message: '请输入您的联系电话!',
+                    message: "Vui lòng nhập số điện thoại liên lạc của bạn!",
                   },
                   {
                     validator: validatorPhone,
@@ -222,7 +222,7 @@ const AvatarView = ({ avatar }: { avatar: string }) => {
 
   return (
     <>
-      <div className={styles.avatar_title}>头像</div>
+      <div className={styles.avatar_title}>Ảnh đại diện</div>
       <div className={styles.avatar}>
         <img src={avatar} alt="avatar" />
       </div>
@@ -230,7 +230,7 @@ const AvatarView = ({ avatar }: { avatar: string }) => {
         <div className={styles.button_view}>
           <Button>
             <UploadOutlined />
-            更换头像
+            Thay đổi ảnh đại diện
           </Button>
         </div>
       </Upload>
