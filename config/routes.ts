@@ -159,7 +159,7 @@ export default [
         path: "/system",
         redirect: "/system/crm/title",
       },
-       // ===== Nhóm Phân quyền =====
+      // ===== Nhóm Phân quyền =====
       {
         name: "Phân quyền",
         icon: "smile",
@@ -573,29 +573,29 @@ export default [
   //     },
   //   ],
   // },
-  // {
-  //   name: "account",
-  //   icon: "user",
-  //   path: "/account",
-  //   routes: [
-  //     {
-  //       path: "/account",
-  //       redirect: "/account/center",
-  //     },
-  //     {
-  //       name: "center",
-  //       icon: "smile",
-  //       path: "/account/center",
-  //       component: "./account/center",
-  //     },
-  //     {
-  //       name: "settings",
-  //       icon: "smile",
-  //       path: "/account/settings",
-  //       component: "./account/settings",
-  //     },
-  //   ],
-  // },
+  {
+    name: "account",
+    icon: "user",
+    path: "/account",
+    routes: [
+      {
+        path: "/account",
+        redirect: "/account/settings",
+      },
+      // {
+      //   name: "center",
+      //   icon: "smile",
+      //   path: "/account/center",
+      //   component: "./account/center",
+      // },
+      {
+        name: "settings",
+        icon: "smile",
+        path: "/account/settings",
+        component: "./account/settings",
+      },
+    ],
+  },
   {
     path: "/",
     redirect: "/dashboard/analysis",

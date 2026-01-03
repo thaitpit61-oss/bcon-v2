@@ -104,6 +104,12 @@ const LoginPage: React.FC = () => {
                 alt="BCONS"
                 className="w-full max-w-[560px] drop-shadow-[0_16px_30px_rgba(2,6,23,0.12)]"
               />
+              <div className="mt-5 pl-1">
+                <Title level={2} className="!mb-0 !text-slate-800">
+                  Khác biệt ở chữ Tín
+                </Title>
+                <Text className="text-slate-500">Difference in confidence</Text>
+              </div>
             </div>
           </div>
 

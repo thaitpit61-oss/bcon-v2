@@ -21,7 +21,10 @@ const ProjectCreate: React.FC = () => {
   };
 
   return (
-    <PageContainer title="Tạo dự án">
+    <PageContainer
+      title="Tạo dự án"
+      onBack={() => history.push("/project/list")}
+    >
       <ProCard>
         <ProForm
           layout="vertical"

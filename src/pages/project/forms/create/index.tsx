@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   PageContainer,
   ProCard,
@@ -7,15 +6,16 @@ import {
   ProFormSwitch,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-components';
-import { history } from '@umijs/max';
-import { message } from 'antd';
+} from "@ant-design/pro-components";
+import { history } from "@umijs/max";
+import { message } from "antd";
+import React from "react";
 
 const ProjectFormCreate: React.FC = () => {
   const onFinish = async (values: any) => {
-    console.log('Create form', values);
-    message.success('Tạo biểu mẫu thành công (mock)');
-    history.push('/project/forms');
+    console.log("Create form", values);
+    message.success("Tạo biểu mẫu thành công (mock)");
+    history.push("/project/forms");
     return true;
   };
 
@@ -29,13 +29,13 @@ const ProjectFormCreate: React.FC = () => {
           onFinish={onFinish}
           submitter={{
             searchConfig: {
-              submitText: 'Tạo',
-              resetText: 'Huỷ',
+              submitText: "Tạo",
+              resetText: "Huỷ",
             },
             resetButtonProps: {
               onClick: (e) => {
                 e.preventDefault();
-                history.push('/project/forms');
+                history.push("/project/forms");
               },
             },
           }}
@@ -43,7 +43,7 @@ const ProjectFormCreate: React.FC = () => {
           <ProFormText
             name="tenBieuMau"
             label="Tên biểu mẫu"
-            rules={[{ required: true, message: 'Vui lòng nhập tên biểu mẫu' }]}
+            rules={[{ required: true, message: "Vui lòng nhập tên biểu mẫu" }]}
             colProps={{ span: 24 }}
           />
 
@@ -57,27 +57,27 @@ const ProjectFormCreate: React.FC = () => {
             colProps={{ span: 24 }}
           />
 
+          <ProFormText name="nvTao" label="Nhân viên tạo" />
+
+          <ProFormText name="nvCapNhat" label="Nhân viên cập nhật" />
+          <ProFormDatePicker
+            name="ngayTao"
+            label="Ngày tạo"
+            fieldProps={{ format: "YYYY-MM-DD" }}
+          />
+          <ProFormDatePicker
+            name="ngayCapNhat"
+            label="Ngày cập nhật"
+            fieldProps={{ format: "YYYY-MM-DD" }}
+          />
+
           <ProFormSwitch
             name="khoa"
             label="Khóa"
             fieldProps={{
-              checkedChildren: 'Khóa',
-              unCheckedChildren: 'Mở',
+              checkedChildren: "Khóa",
+              unCheckedChildren: "Mở",
             }}
-          />
-
-          <ProFormText name="nvTao" label="Nhân viên tạo" />
-          <ProFormDatePicker
-            name="ngayTao"
-            label="Ngày tạo"
-            fieldProps={{ format: 'YYYY-MM-DD' }}
-          />
-
-          <ProFormText name="nvCapNhat" label="Nhân viên cập nhật" />
-          <ProFormDatePicker
-            name="ngayCapNhat"
-            label="Ngày cập nhật"
-            fieldProps={{ format: 'YYYY-MM-DD' }}
           />
         </ProForm>
       </ProCard>
