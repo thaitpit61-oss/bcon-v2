@@ -238,7 +238,7 @@ const UserList: React.FC = () => {
             key="create"
             type="primary"
             icon={<PlusOutlined />}
-            onClick={() => history.push("/crm/user/create")}
+            onClick={() => history.push("/user/create")}
           >
             Tạo người dùng mới
           </Button>,
