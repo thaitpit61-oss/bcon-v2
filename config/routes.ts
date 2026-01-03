@@ -382,8 +382,8 @@ export default [
       },
     ],
   },
-  
-    ///////////////////// User routes /////////////////////
+
+  ///////////////////// User routes /////////////////////
   {
     path: "/user",
     name: "Quản lý người dùng",
@@ -398,6 +398,10 @@ export default [
         icon: "smile",
         path: "/user/list",
         component: "./user/list",
+      },
+      {
+        path: "/user/create",
+        component: "./user/create",
       },
     ],
   },
